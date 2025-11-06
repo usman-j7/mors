@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MORS | Private Intelligence</title>
+    <meta
+      name="description"
+      content="Private intelligence for law firms and healthcare. Clear answers from your own documents. Remote setup. You stay in control."
+    />
+    <meta name="theme-color" content="#000000" />
+    <style>
+      :root {
+        --dark: #000;
+        --light: #fff;
+        --muted-dark: rgba(255, 255, 255, 0.72);
+        --muted-light: rgba(0, 0, 0, 0.68);
+        --line-dark: rgba(255, 255, 255, 0.14);
+        --line-light: rgba(0, 0, 0, 0.14);
+        --nav-h: 92px;
+        --radius: 18px;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        background: var(--dark);
+        color: #fff;
+        font-family: Arial, Helvetica, sans-serif;
+        line-height: 1.55;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      h1,
+      h2,
+      h3,
+      .wordmark,
+      .nav-link,
+      .cta,
+      summary {
+        font-family: Helvetica, Arial, sans-serif;
+        font-weight: 500;
+        letter-spacing: 0.02em;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+        transition: opacity 0.18s ease, transform 0.18s ease, color 0.18s ease;
+      }
+      a:active {
+        transform: translateY(1px);
+      }
+      img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 14px;
+      }
+      .wrap {
+        width: min(1140px, 92vw);
+        margin-inline: auto;
+      }
+      section {
+        padding: 78px 0;
+      }
+      .band-dark {
+        background: var(--dark);
+        color: #fff;
+      }
+      .band-light {
+        background: var(--light);
+        color: #000;
+      }
+      .band-dark .lead {
+        color: var(--muted-dark);
+      }
+      .band-light .lead {
+        color: var(--muted-light);
+      }
+
+      .band-dark .lead, .band-dark p, .band-dark li, .band-dark .copy, .band-dark .banner-sub {
+        color: #fff !important; /* Force white color, remove any opacity */
+      }
+      .band-light .lead, .band-light p, .band-light li, .band-light .copy, .band-light .banner-sub {
+        color: #000 !important; /* Ensure black text for light sections */
+      }
+      main section[id]::before {
+        content: "";
+        display: block;
+        height: var(--nav-h);
+        margin-top: calc(-1 * var(--nav-h));
+        visibility: hidden;
+      }
+
+      /* Header */
+      header {
+        position: fixed;
+        inset: 0 0 auto 0;
+        height: var(--nav-h);
+        z-index: 100;
+        background: rgba(0, 0, 0, 0.7);
+        color: #fff;
+        backdrop-filter: saturate(140%) blur(10px);
+        border-bottom: 1px solid var(--line-dark);
+        transition: transform 0.24s ease, background 0.24s ease,
+          color 0.24s ease, border-color 0.24s ease;
+      }
+      header.hide {
+        transform: translateY(-100%);
+      }
+      header.light {
+        background: #fff;
+        color: #000;
+        border-bottom: 1px solid var(--line-light);
+      }
+      .head-inner {
+        height: var(--nav-h);
+        width: min(1250px, 95vw);
+        margin-inline: auto;
+        padding: 0 14px;
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+        gap: 16px;
+      }
+      .wordmark {
+        font-size: 28px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+      nav.primary {
+        display: none;
+        align-items: stretch;
+        justify-content: center;
+        gap: 26px;
+      }
+      @media (min-width: 1024px) {
+        nav.primary {
+          display: flex;
+        }
+      }
+      .nav-link {
+        position: relative;
+        padding: 28px 0;
+        white-space: nowrap;
+        text-transform: uppercase;
+      }
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 16px;
+        height: 2px;
+        background: currentColor;
+        transform: scaleX(0);
+        transform-origin: left center;
+        transition: transform 0.28s ease;
+      }
+      .nav-link:hover::after,
+      .nav-link[aria-current="page"]::after {
+        transform: scaleX(1);
+      }
+      .actions {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        justify-self: end;
+      }
+      .cta-small {
+        padding: 10px 14px;
+        border-radius: 999px;
+        border: 1px solid currentColor;
+        background: #fff;
+        color: #000;
+      }
+
+      /* Ensure the "Book a Call" button is in one line */
+      .actions .cta-small {
+        white-space: nowrap; /* Prevent wrapping */
+        display: inline-block; /* Ensure it stays in one line */
+        padding: 12px 24px; /* Control padding for better size */
+        font-size: 16px; /* Adjust font size if needed */
+      }
+
+      @media (max-width: 420px) {
+        .actions .cta-small {
+          font-size: 14px; /* Adjust font size on smaller screens */
+          padding: 10px 18px; /* Adjust padding for smaller screens */
+        }
+      }
+
+
+      /* Section banners (big titles full width) */
+      .banner {
+        padding: 36px 0;
+        border-top: 1px solid currentColor;
+        border-bottom: 1px solid currentColor;
+      }
+      .banner .wrap {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+      .banner-title {
+        font-size: clamp(28px, 6vw, 60px);
+        line-height: 1;
+        letter-spacing: 0.01em;
+      }
+      .banner-sub {
+        opacity: 0.8;
+        font-size: 16px;
+      }
+
+      /* Panels */
+      .panel {
+        border: 1px solid var(--line-dark);
+        border-radius: var(--radius);
+        padding: 28px;
+        background: transparent;
+        transition: transform 0.2s ease;
+      }
+      .panel:hover {
+        transform: translateY(-2px);
+      }
+      .band-light .panel {
+        border-color: var(--line-light);
+      }
+      .section-head {
+        margin-bottom: 22px;
+      }
+
+      /* Hero */
+      .hero {
+        min-height: 92vh;
+        display: grid;
+        align-items: center;
+        position: relative; /* added for subtle background animation */
+      }
+      /* subtle hero micro-animation */
+      .hero::before{
+        content:"";
+        position:absolute; inset:-12% -12%;
+        background:
+          radial-gradient(60% 60% at 70% 30%, rgba(255,255,255,.06), transparent 60%),
+          radial-gradient(40% 40% at 20% 70%, rgba(255,255,255,.04), transparent 60%);
+        animation: floatGlow 18s ease-in-out infinite alternate;
+        pointer-events:none;
+        z-index:0;
+      }
+      .hero .wrap{ position: relative; z-index: 1; }
+      @keyframes floatGlow{
+        0% { transform: translate3d(0,0,0) scale(1); }
+        100% { transform: translate3d(1.5rem,-1rem,0) scale(1.03); }
+      }
+
+      .h1 {
+        font-size: clamp(56px, 14vw, 148px);
+        line-height: 0.92;
+        letter-spacing: -0.02em;
+      }
+      .hero-type {
+        position: relative;
+      }
+      .hero-type::after {
+        content: "";
+        display: inline-block;
+        width: 0.06em;
+        height: 0.9em;
+        background: currentColor;
+        margin-left: 0.06em;
+        animation: blink 1s steps(1) infinite;
+      }
+      @keyframes blink {
+        50% {
+          opacity: 0;
+        }
+      }
+      .lead {
+        margin-top: 18px;
+        font-size: 18px;
+      }
+      .buttons {
+        display: flex;
+        gap: 12px;
+        margin-top: 28px;
+      }
+      .cta {
+        padding: 12px 18px;
+        border-radius: 999px;
+        border: none;
+        background: #fff;
+        color: #000;
+      }
+      .cta-ghost {
+        padding: 12px 18px;
+        border-radius: 999px;
+        border: 1px solid var(--line-dark);
+        background: transparent;
+        color: inherit;
+      }
+      .band-light .cta-ghost {
+        border-color: var(--line-light);
+      }
+      /* Make placeholders look clean and less "techy" */
+      .input-line::placeholder,
+      .input-area::placeholder {
+        font-family: Arial, sans-serif;
+        opacity: 0.65;
+        color: inherit;
+      }
+
+      /* Submit button underline animation (like nav links) */
+      .cta-underline {
+        position: relative;
+        background: none;
+        color: inherit;
+        border: none;
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        padding: 12px 0;
+        cursor: pointer;
+      }
+
+      .cta-underline::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 2px;
+        background: currentColor;
+        transform: scaleX(0);
+        transform-origin: left center;
+        transition: transform 0.28s ease;
+      }
+
+      .cta-underline:hover::after {
+        transform: scaleX(1);
+      }
+
+      /* Trust row */
+      .trust {
+        display: flex;
+        gap: 22px;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-top: 18px;
+      }
+      .trust .hint {
+        opacity: 0.8;
+        font-size: 14px;
+      }
+      .logo-pill {
+        width: 100px;
+        height: 36px;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.1);
+      }
+      .band-light .logo-pill {
+        background: rgba(0, 0, 0, 0.06);
+      }
+
+      /* Grids */
+      .grid {
+        display: grid;
+        gap: 24px;
+      }
+      .g2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .g3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+      @media (max-width: 980px) {
+        .g2,
+        .g3 {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .metric {
+        font-size: 44px;
+        letter-spacing: -0.02em;
+      }
+      .metric small {
+        font-size: 16px;
+        opacity: 0.8;
+      }
+
+      /* Cases / FAQs */
+      details.case {
+        border: 1px solid var(--line-dark);
+        border-radius: 14px;
+        padding: 16px 18px;
+        background: transparent;
+        transition: transform 0.2s ease;
+      }
+      .band-light details.case {
+        border-color: var(--line-light);
+      }
+      details.case[open] {
+        transform: translateY(-2px);
+      }
+      summary {
+        list-style: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        font-size: 18px;
+        padding: 6px 0;
+      }
+      summary::-webkit-details-marker {
+        display: none;
+      }
+      .caret {
+        width: 18px;
+        height: 18px;
+        display: inline-block;
+        border-right: 2px solid currentColor;
+        border-bottom: 2px solid currentColor;
+        rotate: -45deg;
+        transition: rotate 0.2s ease;
+      }
+      details[open] .caret {
+        rotate: 45deg;
+      }
+
+      /* Appear-on-scroll + stagger */
+      .appear {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+      .appear.in {
+        opacity: 1;
+        transform: none;
+        transition: opacity 0.64s cubic-bezier(0.2, 0.8, 0.2, 1),
+          transform 0.64s cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+      .stagger > * {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      .stagger.in > * {
+        animation: staggerIn 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+      }
+      .stagger.in > *:nth-child(1) {
+        animation-delay: 0.05s;
+      }
+      .stagger.in > *:nth-child(2) {
+        animation-delay: 0.12s;
+      }
+      .stagger.in > *:nth-child(3) {
+        animation-delay: 0.19s;
+      }
+      .stagger.in > *:nth-child(4) {
+        animation-delay: 0.26s;
+      }
+      .stagger.in > *:nth-child(5) {
+        animation-delay: 0.33s;
+      }
+      @keyframes staggerIn {
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+
+      /* Contact */
+      .contact-title {
+        font-size: clamp(48px, 10vw, 120px);
+        line-height: 0.95;
+        margin: 0 0 12px;
+      }
+      .form-vertical label {
+        display: block;
+        margin: 18px 0 8px;
+        font-size: 18px;
+      }
+      .input-line,
+      .input-area {
+        width: 100%;
+        padding: 16px 14px;
+        font-size: 18px;
+        color: inherit;
+        border: none;
+        border-radius: 14px;
+        background: rgba(0, 0, 0, 0.04);
+        outline: none;
+        box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.12);
+      }
+      .band-dark .input-line,
+      .band-dark .input-area {
+        background: rgba(255, 255, 255, 0.06);
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18);
+      }
+      .input-line:focus,
+      .input-area:focus {
+        box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.22);
+      }
+      .row {
+        display: grid;
+        gap: 12px;
+        grid-template-columns: 1fr 1fr;
+      }
+      @media (max-width: 760px) {
+        .row {
+          grid-template-columns: 1fr;
+        }
+      }
+      .note {
+        font-size: 14px;
+        opacity: 0.85;
+      }
+      .form-actions {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        margin-top: 18px;
+      }
+
+      /* Footer (bigger, with search) */
+      footer {
+        padding: 56px 0;
+        border-top: 1px solid var(--line-dark);
+      }
+      .footer-grid {
+        display: grid;
+        gap: 24px;
+        grid-template-columns: 1.2fr 0.8fr;
+      }
+      @media (max-width: 900px) {
+        .footer-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .footer-brand {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .wordmark.sm {
+        font-size: 18px;
+        letter-spacing: 0.18em;
+      }
+      .footer-nav a {
+        display: inline-block;
+        margin-right: 14px;
+        margin-bottom: 8px;
+        font-size: 14px;
+        opacity: 0.9;
+      }
+      .copy {
+        font-size: 14px;
+        opacity: 0.9;
+        margin-top: 10px;
+      }
+      .footer-search {
+        border: 1px solid var(--line-dark);
+        border-radius: 16px;
+        padding: 16px;
+        background: rgba(255, 255, 255, 0.05);
+      }
+      .search-row {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+      .search-input {
+        flex: 1;
+        padding: 12px 14px;
+        border-radius: 12px;
+        border: none;
+        background: rgba(255, 255, 255, 0.12);
+        color: #fff;
+        font-size: 16px;
+        outline: none;
+      }
+      .search-btn {
+        padding: 12px 16px;
+        border-radius: 999px;
+        border: none;
+        background: #fff;
+        color: #000;
+        cursor: pointer;
+      }
+      .search-results {
+        margin-top: 10px;
+        display: grid;
+        gap: 8px;
+        max-height: 220px;
+        overflow: auto;
+      }
+      .search-results a {
+        display: block;
+        padding: 10px 12px;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.12);
+        color: #fff;
+      }
+      .search-hint {
+        font-size: 12px;
+        opacity: 0.85;
+        margin-top: 6px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- HEADER -->
+    <header id="siteHeader">
+      <div class="head-inner">
+        <a href="#top" class="brand" aria-label="MORS Home"
+          ><div class="wordmark">MORS</div></a
+        >
+        <nav class="primary" aria-label="Primary">
+          <a href="#home" class="nav-link" aria-current="page">HOME</a>
+          <a href="#what" class="nav-link">WHAT WE DO</a>
+          <a href="#why" class="nav-link">WHY IT MATTERS</a>
+          <a href="#how" class="nav-link">HOW WE WORK</a>
+          <a href="#law" class="nav-link">LAW</a>
+          <a href="#health" class="nav-link">HEALTHCARE</a>
+          <a href="#promise" class="nav-link">OUR PROMISE</a>
+          <a href="#contact" class="nav-link">CONTACT</a>
+        </nav>
+        <div class="actions">
+          <a
+            href="https://scheduler.zoom.us/ridwan-mohammad/morsglobal"
+            target="_blank"
+            rel="noopener"
+            class="cta-small"
+            >Book a call</a
+          >
+        </div>
+      </div>
+    </header>
+
+    <main id="top">
+      <!-- HERO -->
+      <section id="home" class="band-dark hero">
+        <div class="wrap">
+          <h1
+            id="heroTitle"
+            class="h1 hero-type"
+            data-text="Built On Trust"
+          ></h1>
+
+          <!-- Added: short hero tagline -->
+          <p class="lead appear">We’re an independent, private intelligence and systems consultancy for law and healthcare</p>
+
+          <div class="buttons appear">
+            <a href="#contact" class="cta">Request a sandbox</a>
+            <a
+              href="https://scheduler.zoom.us/your-public-id"
+              target="_blank"
+              rel="noopener"
+              class="cta cta-ghost"
+              >Book a call</a
+            >
+          </div>
+          <div class="trust appear">
+            <span class="hint">Trusted in regulated environments</span>
+            <span class="logo-pill" title="Client placeholder"></span>
+            <span class="logo-pill" title="Client placeholder"></span>
+            <span class="logo-pill" title="Client placeholder"></span>
+            <span class="logo-pill" title="Client placeholder"></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- BANNER: WHAT WE DO -->
+      <div class="band-light banner" id="what">
+        <div class="wrap">
+          <h2 class="banner-title">What we do</h2>
+          <p class="banner-sub">
+            Make your knowledge usable — safely, quickly, and on your terms.
+          </p>
+        </div>
+      </div>
+      <section class="band-light">
+        <div class="wrap">
+          <div class="grid g3 appear stagger">
+            <div class="panel">
+              <h3>Answers you can trust</h3>
+              <p class="lead">
+                Short, clear responses that link back to the exact paragraph in
+                your files.
+              </p>
+            </div>
+            <div class="panel">
+              <h3>Private by default</h3>
+              <p class="lead">
+                No public services. Your information stays inside your boundary.
+              </p>
+            </div>
+            <div class="panel">
+              <h3>Remote delivery</h3>
+              <p class="lead">
+                Everything set up off-site. Your team signs in and starts using
+                it.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- BANNER: WHY IT MATTERS -->
+      <div class="band-dark banner" id="why">
+        <div class="wrap">
+          <h2 class="banner-title">Why it matters</h2>
+          <p class="banner-sub">Less time searching. More time deciding.</p>
+        </div>
+      </div>
+      <section class="band-dark">
+        <div class="wrap">
+          <div class="grid g3 appear stagger">
+            <div class="panel">
+              <h3>Work moves faster</h3>
+              <p class="lead">Drafts and summaries in minutes — not hours.</p>
+              <div class="metric">–70% <small>draft time</small></div>
+            </div>
+            <div class="panel">
+              <h3>Keep control</h3>
+              <p class="lead">You choose who sees what and for how long.</p>
+            </div>
+            <div class="panel">
+              <h3>Fits your teams</h3>
+              <p class="lead">Use your usual log-ins. No new tools to learn.</p>
+            </div>
+          </div>
+
+          <!-- Added: small anonymised case snippet -->
+          <div class="panel appear" style="margin-top:18px">
+            <p class="lead"><em>“Deployed in 5 days with page-linked briefs. Confidential by design.”</em><br><span style="font-size:14px">UK law firm, 250 staff (anonymised)</span></p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- BANNER: HOW WE WORK -->
+      <div class="band-light banner" id="how">
+        <div class="wrap">
+          <h2 class="banner-title">How we work</h2>
+          <p class="banner-sub">Clear steps. No disruption.</p>
+        </div>
+      </div>
+      <section class="band-light">
+        <div class="wrap">
+          <div class="grid g3 appear stagger">
+            <div class="panel">
+              <h3>1) Set up your space</h3>
+              <p class="lead">
+                We create a private workspace for your firm in your chosen
+                region.
+              </p>
+            </div>
+            <div class="panel">
+              <h3>2) Add your documents</h3>
+              <p class="lead">
+                We prepare your files so answers can point back to the right
+                source.
+              </p>
+            </div>
+            <div class="panel">
+              <h3>3) Go live</h3>
+              <p class="lead">
+                Your people sign in, and you have a simple dashboard for
+                oversight.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- BANNER: LAW -->
+      <div class="band-dark banner" id="law">
+        <div class="wrap">
+          <h2 class="banner-title">For law</h2>
+          <p class="banner-sub">
+            Drafts, clauses, and bundles — faster and sourced.
+          </p>
+        </div>
+      </div>
+      <section class="band-dark">
+        <div class="wrap">
+          <div class="grid g2 appear stagger">
+            <div class="panel">
+              <h3>Common needs</h3>
+              <ul class="lead" style="margin: 8px 0 0 18px">
+                <li>First drafts from large bundles</li>
+                <li>Consistent clauses across matters</li>
+                <li>Clear activity records</li>
+              </ul>
+            </div>
+            <div class="panel">
+              <h3>What you get</h3>
+              <ul class="lead" style="margin: 8px 0 0 18px">
+                <li>Bundles → briefs with page links</li>
+                <li>Clauses built from your precedents</li>
+                <li>Downloadable usage and admin activity</li>
+              </ul>
+            </div>
+          </div>
+          <div class="appear" style="margin-top: 18px">
+            <details class="case">
+              <summary>
+                <span>Is client information ever shared?</span
+                ><span class="caret" aria-hidden="true"></span>
+              </summary>
+              <div class="case-body">
+                <p class="lead">
+                  No. Your workspace is private and separate. We don’t use
+                  public endpoints.
+                </p>
+              </div>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- BANNER: HEALTHCARE -->
+      <div class="band-light banner" id="health">
+        <div class="wrap">
+          <h2 class="banner-title">For healthcare</h2>
+          <p class="banner-sub">Clear summaries. Policy-aware answers.</p>
+        </div>
+      </div>
+      <section class="band-light">
+        <div class="wrap">
+          <div class="grid g2 appear stagger">
+            <div class="panel">
+              <h3>Common needs</h3>
+              <ul class="lead" style="margin: 8px 0 0 18px">
+                <li>Summaries for handovers</li>
+                <li>Decisions aligned to local policy</li>
+                <li>Care with PHI/PII</li>
+              </ul>
+            </div>
+            <div class="panel">
+              <h3>What you get</h3>
+              <ul class="lead" style="margin: 8px 0 0 18px">
+                <li>Notes → clear summaries in minutes</li>
+                <li>Answers that cite your protocols</li>
+                <li>Simple controls for keeping or deleting data</li>
+              </ul>
+            </div>
+          </div>
+          <div class="appear" style="margin-top: 18px">
+            <details class="case">
+              <summary>
+                <span>Where is data kept?</span
+                ><span class="caret" aria-hidden="true"></span>
+              </summary>
+              <div class="case-body">
+                <p class="lead">
+                  In the region you choose. Residency and access follow your
+                  policies.
+                </p>
+              </div>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- BANNER: OUR PROMISE -->
+      <div class="band-dark banner" id="promise">
+        <div class="wrap">
+          <h2 class="banner-title">Our promise</h2>
+          <p class="banner-sub">Discretion first. Clarity always.</p>
+        </div>
+      </div>
+      <section class="band-dark">
+        <div class="wrap">
+          <div class="grid g3 appear stagger">
+            <div class="panel">
+              <h3>Separate workspace</h3>
+              <p class="lead">
+                Your information is kept apart from other clients. No mixing.
+              </p>
+            </div>
+            <div class="panel">
+              <h3>Simple sign-in</h3>
+              <p class="lead">
+                Your staff use their usual log-ins. Add or remove access in
+                minutes.
+              </p>
+            </div>
+            <div class="panel">
+              <h3>Clear records</h3>
+              <p class="lead">
+                See who used it and when. Keep data only as long as you choose.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <div class="band-light banner" id="contact">
+        <div class="wrap">
+          <h2 class="banner-title">Contact us</h2>
+          <p class="banner-sub">
+            Tell us what you need. We’ll prepare a private sandbox and a plan to
+            go live.
+          </p>
+        </div>
+      </div>
+      <section class="band-light">
+        <div class="wrap">
+          <div
+            class="panel appear"
+            style="border: none; background: transparent"
+          >
+            <h2 class="contact-title appear">Let's talk</h2>
+            <form
+              class="form-vertical stagger"
+              action="https://formspree.io/f/xdkpqprv"
+              method="POST"
+              style="max-width: 780px; margin: auto"
+            >
+              <div class="row">
+                <div>
+                  <label>First name</label>
+                  <input
+                    type="text"
+                    name="first_name"
+                    class="input-line"
+                    placeholder="e.g., Sarah"
+                    required
+                  />
+                </div>
+                <div>
+                  <label>Surname</label>
+                  <input
+                    type="text"
+                    name="last_name"
+                    class="input-line"
+                    placeholder="e.g., Malik"
+                    required
+                  />
+                </div>
+              </div>
+
+              <label>Work email</label>
+              <input
+                type="email"
+                name="_replyto"
+                class="input-line"
+                placeholder="e.g., sarah@yourcompany.com"
+                required
+              />
+
+              <div class="row">
+                <div>
+                  <label>Company</label>
+                  <input
+                    type="text"
+                    name="company"
+                    class="input-line"
+                    placeholder="Your organisation"
+                    required
+                  />
+                </div>
+                <div>
+                  <label>Team size</label>
+                  <input
+                    type="number"
+                    name="team_size"
+                    min="1"
+                    step="1"
+                    class="input-line"
+                    placeholder="e.g., 10"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="row">
+                <div>
+                  <label>Industry</label>
+                  <input
+                    type="text"
+                    name="industry"
+                    class="input-line"
+                    placeholder="Law / Healthcare / Other"
+                    required
+                  />
+                </div>
+                <div>
+                  <label>Region</label>
+                  <input
+                    type="text"
+                    name="region"
+                    class="input-line"
+                    placeholder="United Kingdom"
+                    required
+                  />
+                </div>
+              </div>
+
+              <label>What would you like this to do?</label>
+              <input
+                type="text"
+                name="use_case"
+                class="input-line"
+                placeholder="Tell us what you’d like to improve or automate"
+                required
+              />
+
+              <label>Anything else?</label>
+              <textarea
+                rows="6"
+                name="message"
+                class="input-area"
+                placeholder="Share a bit more context, or when you’d like to start"
+              ></textarea>
+
+              <input
+                type="hidden"
+                name="_subject"
+                value="MORS Website Inquiry"
+              />
+              <input
+                type="hidden"
+                name="_cc"
+                value="rmohammad@morsglobal.com"
+              />
+
+              <div class="form-actions">
+                <button class="cta cta-underline" type="submit">Submit</button>
+                <span class="note"
+                  >We reply within one business day. Remote delivery. NDA
+                  available on request.</span
+                >
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER (with search) -->
+    <footer class="band-dark">
+      <div class="wrap footer-grid">
+        <div class="footer-brand">
+          <div class="wordmark sm">MORS</div>
+          <div class="copy">
+            © <span id="year"></span> Mors Consulting Ltd — Mors Global.
+          </div>
+          <div class="copy">
+            Privacy & Governance: confidential workspaces • in-region storage •
+            activity oversight
+          </div>
+          <!-- Added: Privacy / Terms links -->
+          <div class="copy"><a href="#!" style="text-decoration:underline">Privacy</a> • <a href="#!" style="text-decoration:underline">Terms</a></div>
+
+          <nav class="footer-nav" aria-label="Footer">
+            <a href="#what">What we do</a><a href="#why">Why it matters</a
+            ><a href="#how">How we work</a> <a href="#law">Law</a
+            ><a href="#health">Healthcare</a><a href="#promise">Our promise</a
+            ><a href="#contact">Contact</a>
+          </nav>
+        </div>
+
+        <div class="footer-search appear" id="footerSearch">
+          <div class="search-row">
+            <input
+              id="siteSearchInput"
+              class="search-input"
+              type="search"
+              placeholder="Search this page (e.g., summaries, privacy, handovers)"
+            />
+            <button id="siteSearchBtn" class="search-btn" type="button">
+              Search
+            </button>
+          </div>
+          <div id="siteSearchResults" class="search-results"></div>
+          <div class="search-hint">
+            Results link to sections above. Tip: press Enter to jump to the
+            first match.
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="main.js"></script>
+  </body>
+</html>
