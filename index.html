@@ -3,11 +3,19 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>MORS | Private Intelligence</title>
+    <title>MORS | Applied Intelligence for Regulated Firms</title>
     <meta
       name="description"
-      content="Private intelligence for law firms and healthcare. Clear answers from your own documents. Remote setup. You stay in control."
+      content="MORS provides applied intelligence — private AI and knowledge systems for law, healthcare, real estate, and professional services. NDA-first, explainable, secure."
     />
+    <meta property="og:title" content="MORS | Applied Intelligence for Regulated Firms" />
+    <meta
+      property="og:description"
+      content="Private AI and knowledge systems for regulated organisations. Confidential, explainable, NDA-first."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://morsglobal.com" />
+    <meta property="og:image" content="https://morsglobal.com/og-image.png" />
     <meta name="theme-color" content="#000000" />
     <style>
       :root {
@@ -54,6 +62,14 @@
       a:active {
         transform: translateY(1px);
       }
+      a:focus-visible,
+      button:focus-visible,
+      input:focus-visible,
+      select:focus-visible,
+      textarea:focus-visible {
+        outline: 2px solid currentColor;
+        outline-offset: 3px;
+      }
       img {
         max-width: 100%;
         height: auto;
@@ -88,7 +104,8 @@
       .band-light .lead, .band-light p, .band-light li, .band-light .copy, .band-light .banner-sub {
         color: #000 !important; /* Ensure black text for light sections */
       }
-      main section[id]::before {
+      main section[id]::before,
+      .banner[id]::before {
         content: "";
         display: block;
         height: var(--nav-h);
@@ -147,6 +164,8 @@
         position: relative;
         padding: 28px 0;
         white-space: nowrap;
+      }
+      header .nav-link {
         text-transform: uppercase;
       }
       .nav-link::after {
@@ -350,23 +369,15 @@
       /* Trust row */
       .trust {
         display: flex;
-        gap: 22px;
+        gap: 10px;
         align-items: center;
         flex-wrap: wrap;
-        margin-top: 18px;
+        margin-top: 24px;
+        font-size: 15px;
       }
       .trust .hint {
-        opacity: 0.8;
+        opacity: 0.75;
         font-size: 14px;
-      }
-      .logo-pill {
-        width: 100px;
-        height: 36px;
-        border-radius: 10px;
-        background: rgba(255, 255, 255, 0.1);
-      }
-      .band-light .logo-pill {
-        background: rgba(0, 0, 0, 0.06);
       }
 
       /* Grids */
@@ -528,90 +539,71 @@
         align-items: center;
         margin-top: 18px;
       }
+      .form-status {
+        font-size: 14px;
+        margin-top: 12px;
+      }
 
-      /* Footer (bigger, with search) */
+      /* Footer */
       footer {
         padding: 56px 0;
         border-top: 1px solid var(--line-dark);
       }
       .footer-grid {
-        display: grid;
-        gap: 24px;
-        grid-template-columns: 1.2fr 0.8fr;
-      }
-      @media (max-width: 900px) {
-        .footer-grid {
-          grid-template-columns: 1fr;
-        }
+        display: flex;
+        gap: 32px;
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-wrap: wrap;
       }
       .footer-brand {
         display: flex;
         flex-direction: column;
-        gap: 12px;
+        gap: 10px;
+        max-width: 420px;
       }
       .wordmark.sm {
         font-size: 18px;
         letter-spacing: 0.18em;
       }
-      .footer-nav a {
-        display: inline-block;
-        margin-right: 14px;
-        margin-bottom: 8px;
-        font-size: 14px;
-        opacity: 0.9;
-      }
       .copy {
         font-size: 14px;
-        opacity: 0.9;
-        margin-top: 10px;
+        opacity: 0.88;
       }
-      .footer-search {
-        border: 1px solid var(--line-dark);
-        border-radius: 16px;
-        padding: 16px;
-        background: rgba(255, 255, 255, 0.05);
-      }
-      .search-row {
+      .footer-social {
         display: flex;
-        gap: 10px;
+        gap: 12px;
         align-items: center;
+        justify-content: flex-start;
       }
-      .search-input {
-        flex: 1;
-        padding: 12px 14px;
-        border-radius: 12px;
-        border: none;
-        background: rgba(255, 255, 255, 0.12);
-        color: #fff;
-        font-size: 16px;
-        outline: none;
+      .footer-social img {
+        opacity: 0.8;
+        transition: opacity 0.2s ease, transform 0.2s ease;
       }
-      .search-btn {
-        padding: 12px 16px;
-        border-radius: 999px;
-        border: none;
-        background: #fff;
-        color: #000;
-        cursor: pointer;
+      .footer-social img:hover {
+        opacity: 1;
+        transform: translateY(-1px);
       }
-      .search-results {
-        margin-top: 10px;
-        display: grid;
-        gap: 8px;
-        max-height: 220px;
-        overflow: auto;
+      @media (max-width: 900px) {
+        .footer-grid {
+          flex-direction: column;
+        }
+        .footer-social {
+          justify-content: flex-start;
+        }
       }
-      .search-results a {
-        display: block;
-        padding: 10px 12px;
-        border-radius: 10px;
-        background: rgba(255, 255, 255, 0.12);
-        color: #fff;
-      }
-      .search-hint {
-        font-size: 12px;
-        opacity: 0.85;
-        margin-top: 6px;
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.001ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.001ms !important;
+        }
+        html {
+          scroll-behavior: auto;
+        }
       }
     </style>
   </head>
@@ -625,21 +617,17 @@
         <nav class="primary" aria-label="Primary">
           <a href="#home" class="nav-link" aria-current="page">HOME</a>
           <a href="#what" class="nav-link">WHAT WE DO</a>
+          <a href="#deliver" class="nav-link">WHAT WE DELIVER</a>
           <a href="#why" class="nav-link">WHY IT MATTERS</a>
-          <a href="#how" class="nav-link">HOW WE WORK</a>
+          <a href="#examples" class="nav-link">EXAMPLE DEPLOYMENTS</a>
           <a href="#law" class="nav-link">LAW</a>
           <a href="#health" class="nav-link">HEALTHCARE</a>
+          <a href="#why-mors" class="nav-link">WHY MORS</a>
           <a href="#promise" class="nav-link">OUR PROMISE</a>
           <a href="#contact" class="nav-link">CONTACT</a>
         </nav>
         <div class="actions">
-          <a
-            href="https://scheduler.zoom.us/ridwan-mohammad/morsglobal"
-            target="_blank"
-            rel="noopener"
-            class="cta-small"
-            >Book a call</a
-          >
+          <a href="#contact" class="cta-small">Book a call</a>
         </div>
       </div>
     </header>
@@ -648,31 +636,22 @@
       <!-- HERO -->
       <section id="home" class="band-dark hero">
         <div class="wrap">
-          <h1
-            id="heroTitle"
-            class="h1 hero-type"
-            data-text="Built On Trust"
-          ></h1>
+          <h1 id="heroTitle" class="h1 hero-type" data-text="Applied Intelligence"></h1>
 
-          <!-- Added: short hero tagline -->
-          <p class="lead appear">We’re an independent, private intelligence and systems consultancy for law and healthcare</p>
+          <p class="lead appear">
+            AI and knowledge systems for regulated organisations — law, healthcare, real estate, and professional services.
+          </p>
 
           <div class="buttons appear">
-            <a href="#contact" class="cta">Request a sandbox</a>
-            <a
-              href="https://scheduler.zoom.us/your-public-id"
-              target="_blank"
-              rel="noopener"
-              class="cta cta-ghost"
-              >Book a call</a
-            >
+            <a href="#contact" class="cta">Book a call</a>
+            <a href="#what" class="cta cta-ghost">Explore what we do</a>
           </div>
           <div class="trust appear">
-            <span class="hint">Trusted in regulated environments</span>
-            <span class="logo-pill" title="Client placeholder"></span>
-            <span class="logo-pill" title="Client placeholder"></span>
-            <span class="logo-pill" title="Client placeholder"></span>
-            <span class="logo-pill" title="Client placeholder"></span>
+            <span class="hint">Built for regulated teams:</span>
+            <span>Law firms</span> ·
+            <span>Healthcare providers</span> ·
+            <span>Real estate</span> ·
+            <span>Financial and professional services</span>
           </div>
         </div>
       </section>
@@ -713,6 +692,41 @@
         </div>
       </section>
 
+      <div class="band-light banner" id="deliver">
+        <div class="wrap">
+          <h2 class="banner-title">What we deliver</h2>
+          <p class="banner-sub">Practical ways to start without disrupting your operations.</p>
+        </div>
+      </div>
+
+      <section class="band-light">
+        <div class="wrap">
+          <div class="grid g3 appear stagger">
+            <div class="panel">
+              <h3>Private AI Workspace</h3>
+              <p class="lead">
+                Answers questions from your own documents only, with links back to source pages.
+              </p>
+              <a href="#contact" class="nav-link" style="padding: 0">Book a call →</a>
+            </div>
+            <div class="panel">
+              <h3>Confidential AI Review</h3>
+              <p class="lead">
+                Short engagement to map safe AI uses across your data, policies, and infrastructure.
+              </p>
+              <a href="#contact" class="nav-link" style="padding: 0">Start a review →</a>
+            </div>
+            <div class="panel">
+              <h3>Policy-Aware Assistant</h3>
+              <p class="lead">
+                An assistant that reflects your internal policies, precedents, and protocols.
+              </p>
+              <a href="#contact" class="nav-link" style="padding: 0">Discuss your use case →</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- BANNER: WHY IT MATTERS -->
       <div class="band-dark banner" id="why">
         <div class="wrap">
@@ -737,44 +751,79 @@
               <p class="lead">Use your usual log-ins. No new tools to learn.</p>
             </div>
           </div>
-
-          <!-- Added: small anonymised case snippet -->
-          <div class="panel appear" style="margin-top:18px">
-            <p class="lead"><em>“Deployed in 5 days with page-linked briefs. Confidential by design.”</em><br><span style="font-size:14px">UK law firm, 250 staff (anonymised)</span></p>
-          </div>
-
         </div>
       </section>
 
-      <!-- BANNER: HOW WE WORK -->
-      <div class="band-light banner" id="how">
+      <div class="band-dark banner" id="examples">
         <div class="wrap">
-          <h2 class="banner-title">How we work</h2>
-          <p class="banner-sub">Clear steps. No disruption.</p>
+          <h2 class="banner-title">Example deployments (illustrative)</h2>
+          <p class="banner-sub">Scenarios that show how applied intelligence works in practice.</p>
         </div>
       </div>
-      <section class="band-light">
+
+      <section class="band-dark">
         <div class="wrap">
           <div class="grid g3 appear stagger">
             <div class="panel">
-              <h3>1) Set up your space</h3>
+              <h3>Law firm (example)</h3>
               <p class="lead">
-                We create a private workspace for your firm in your chosen
-                region.
+                Workspace indexing precedents and bundles with page-linked answers.
+                Target: 30–50% reduction in drafting time.
+              </p>
+              <p><em>For illustration only. No client data shown.</em></p>
+            </div>
+            <div class="panel">
+              <h3>Healthcare provider (example)</h3>
+              <p class="lead">
+                Policy-aware assistant answering only from internal guidelines.
+                Target: faster, consistent decisions.
+              </p>
+              <p><em>For illustration only. No client data shown.</em></p>
+            </div>
+            <div class="panel">
+              <h3>Real estate portfolio (example)</h3>
+              <p class="lead">
+                Searchable clauses, covenants, and key dates across leases.
+                Target: reduced review overhead and fewer missed obligations.
+              </p>
+              <p><em>For illustration only. No client data shown.</em></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="band-dark banner" id="why-mors">
+        <div class="wrap">
+          <h2 class="banner-title">Why MORS</h2>
+          <p class="banner-sub">Built for confidentiality, control, and clarity.</p>
+        </div>
+      </div>
+
+      <section class="band-dark">
+        <div class="wrap">
+          <div class="grid g3 appear stagger">
+            <div class="panel">
+              <h3>No data harvesting</h3>
+              <p class="lead">
+                We do not train models on your documents and do not expose your data to public endpoints.
               </p>
             </div>
             <div class="panel">
-              <h3>2) Add your documents</h3>
+              <h3>In your control</h3>
               <p class="lead">
-                We prepare your files so answers can point back to the right
-                source.
+                Deploy in your chosen region or environment, aligned with your identity and access policies.
               </p>
             </div>
             <div class="panel">
-              <h3>3) Go live</h3>
+              <h3>Explainable answers</h3>
               <p class="lead">
-                Your people sign in, and you have a simple dashboard for
-                oversight.
+                Responses can link back to underlying documents for verification and audit.
+              </p>
+            </div>
+            <div class="panel">
+              <h3>NDA-first</h3>
+              <p class="lead">
+                Discovery and delivery can operate under NDA from the outset, with remote implementation.
               </p>
             </div>
           </div>
@@ -984,28 +1033,32 @@
                 </div>
               </div>
 
-              <div class="row">
-                <div>
-                  <label>Industry</label>
-                  <input
-                    type="text"
-                    name="industry"
-                    class="input-line"
-                    placeholder="Law / Healthcare / Other"
-                    required
-                  />
-                </div>
-                <div>
-                  <label>Region</label>
-                  <input
-                    type="text"
-                    name="region"
-                    class="input-line"
-                    placeholder="United Kingdom"
-                    required
-                  />
-                </div>
-              </div>
+              <label>Which best describes your organisation?</label>
+              <select name="org_type" class="input-line" required>
+                <option value="" disabled selected>Select one</option>
+                <option>Law firm</option>
+                <option>Healthcare provider</option>
+                <option>Real estate / property</option>
+                <option>Financial / professional services</option>
+                <option>Other regulated organisation</option>
+              </select>
+
+              <label>Region</label>
+              <input
+                type="text"
+                name="region"
+                class="input-line"
+                placeholder="United Kingdom"
+                required
+              />
+
+              <label>When are you looking to start?</label>
+              <select name="timeline" class="input-line" required>
+                <option value="" disabled selected>Select one</option>
+                <option>Exploring options</option>
+                <option>Within 3 months</option>
+                <option>Urgent / this quarter</option>
+              </select>
 
               <label>What would you like this to do?</label>
               <input
@@ -1036,58 +1089,44 @@
               />
 
               <div class="form-actions">
-                <button class="cta cta-underline" type="submit">Submit</button>
+                <button class="cta-underline" type="submit">Send secure enquiry</button>
                 <span class="note"
                   >We reply within one business day. Remote delivery. NDA
                   available on request.</span
                 >
               </div>
+              <div class="form-status" role="status" aria-live="polite"></div>
             </form>
           </div>
         </div>
       </section>
     </main>
 
-    <!-- FOOTER (with search) -->
     <footer class="band-dark">
       <div class="wrap footer-grid">
         <div class="footer-brand">
           <div class="wordmark sm">MORS</div>
           <div class="copy">
-            © <span id="year"></span> Mors Consulting Ltd — Mors Global.
+            © <span id="year"></span> MORS Consulting Ltd. All rights reserved.
           </div>
           <div class="copy">
-            Privacy & Governance: confidential workspaces • in-region storage •
-            activity oversight
+            Registered in England &amp; Wales · Privacy-led AI and systems consulting
           </div>
-          <!-- Added: Privacy / Terms links -->
-          <div class="copy"><a href="#!" style="text-decoration:underline">Privacy</a> • <a href="#!" style="text-decoration:underline">Terms</a></div>
-
-          <nav class="footer-nav" aria-label="Footer">
-            <a href="#what">What we do</a><a href="#why">Why it matters</a
-            ><a href="#how">How we work</a> <a href="#law">Law</a
-            ><a href="#health">Healthcare</a><a href="#promise">Our promise</a
-            ><a href="#contact">Contact</a>
-          </nav>
+          <div class="copy">
+            <a href="mailto:contact@morsglobal.com">contact@morsglobal.com</a>
+          </div>
+          <div class="copy">
+            <a href="#!" style="text-decoration:underline">Privacy</a> ·
+            <a href="#!" style="text-decoration:underline">Terms</a>
+          </div>
         </div>
-
-        <div class="footer-search appear" id="footerSearch">
-          <div class="search-row">
-            <input
-              id="siteSearchInput"
-              class="search-input"
-              type="search"
-              placeholder="Search this page (e.g., summaries, privacy, handovers)"
-            />
-            <button id="siteSearchBtn" class="search-btn" type="button">
-              Search
-            </button>
-          </div>
-          <div id="siteSearchResults" class="search-results"></div>
-          <div class="search-hint">
-            Results link to sections above. Tip: press Enter to jump to the
-            first match.
-          </div>
+        <div class="footer-social">
+          <a href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <img src="icons/linkedin.svg" alt="LinkedIn" width="22" height="22" />
+          </a>
+          <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook">
+            <img src="icons/facebook.svg" alt="Facebook" width="22" height="22" />
+          </a>
         </div>
       </div>
     </footer>
