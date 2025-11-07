@@ -3,20 +3,22 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>MORS | Applied Intelligence for Regulated Firms</title>
+    <title>MORS Global | Intelligence For Regulated Firms</title>
     <meta
       name="description"
-      content="MORS provides applied intelligence — private AI and knowledge systems for law, healthcare, real estate, and professional services. NDA-first, explainable, secure."
+      content="MORS designs applied intelligence systems for regulated organisations — using your documents and policies to deliver reliable, auditable answers."
     />
     <meta property="og:title" content="MORS | Applied Intelligence for Regulated Firms" />
     <meta
       property="og:description"
-      content="Private AI and knowledge systems for regulated organisations. Confidential, explainable, NDA-first."
+      content="Private, explainable AI and knowledge systems for firms that operate under regulation. Your rules, your boundary, your oversight."
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://morsglobal.com" />
     <meta property="og:image" content="https://morsglobal.com/og-image.png" />
     <meta name="theme-color" content="#000000" />
+    <link rel="icon" type="image/png" sizes="512x512" href="favicon.png">
+
     <style>
       :root {
         --dark: #000;
@@ -33,6 +35,8 @@
       }
       html {
         scroll-behavior: smooth;
+        max-width: 100%;
+        overflow-x: hidden;
       }
       body {
         margin: 0;
@@ -42,6 +46,8 @@
         line-height: 1.55;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+        max-width: 100%;
+        overflow-x: hidden;
       }
       h1,
       h2,
@@ -83,6 +89,7 @@
       section {
         padding: 78px 0;
       }
+
       .band-dark {
         background: var(--dark);
         color: #fff;
@@ -91,19 +98,22 @@
         background: var(--light);
         color: #000;
       }
-      .band-dark .lead {
-        color: var(--muted-dark);
+
+      .band-dark .lead,
+      .band-dark p,
+      .band-dark li,
+      .band-dark .copy,
+      .band-dark .banner-sub {
+        color: #fff !important;
       }
-      .band-light .lead {
-        color: var(--muted-light);
+      .band-light .lead,
+      .band-light p,
+      .band-light li,
+      .band-light .copy,
+      .band-light .banner-sub {
+        color: #000 !important;
       }
 
-      .band-dark .lead, .band-dark p, .band-dark li, .band-dark .copy, .band-dark .banner-sub {
-        color: #fff !important; /* Force white color, remove any opacity */
-      }
-      .band-light .lead, .band-light p, .band-light li, .band-light .copy, .band-light .banner-sub {
-        color: #000 !important; /* Ensure black text for light sections */
-      }
       main section[id]::before,
       .banner[id]::before {
         content: "";
@@ -118,7 +128,7 @@
         position: fixed;
         inset: 0 0 auto 0;
         height: var(--nav-h);
-        z-index: 100;
+        z-index: 200;
         background: rgba(0, 0, 0, 0.7);
         color: #fff;
         backdrop-filter: saturate(140%) blur(10px);
@@ -149,26 +159,36 @@
         letter-spacing: 0.18em;
         text-transform: uppercase;
       }
+
       nav.primary {
         display: none;
         align-items: stretch;
         justify-content: center;
-        gap: 26px;
+        gap: 22px;
       }
+
       @media (min-width: 1024px) {
         nav.primary {
           display: flex;
         }
       }
-      .nav-link {
+
+      .nav-link,
+      .nav-toggle {
         position: relative;
         padding: 28px 0;
         white-space: nowrap;
-      }
-      header .nav-link {
+        font-size: 12px;
+        letter-spacing: 0.14em;
         text-transform: uppercase;
+        background: transparent;
+        border: none;
+        color: inherit;
+        cursor: pointer;
       }
-      .nav-link::after {
+
+      .nav-link::after,
+      .nav-toggle::after {
         content: "";
         position: absolute;
         left: 0;
@@ -180,41 +200,241 @@
         transform-origin: left center;
         transition: transform 0.28s ease;
       }
+
       .nav-link:hover::after,
-      .nav-link[aria-current="page"]::after {
+      .nav-link[aria-current="page"]::after,
+      .nav-dropdown.open .nav-toggle::after,
+      .nav-toggle:hover::after {
         transform: scaleX(1);
       }
+
+      /* Inline CTA links inside panels */
+      .link-inline {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 11px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        padding: 6px 0 2px;
+        position: relative;
+      }
+      .link-inline::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 2px;
+        background: currentColor;
+        transform: scaleX(0);
+        transform-origin: left center;
+        transition: transform 0.24s ease;
+      }
+      .link-inline:hover::after {
+        transform: scaleX(1);
+      }
+
+      /* WHY MORS dropdown (desktop overlay) */
+      .nav-dropdown {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+      }
+
+      .nav-toggle-inner {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .nav-toggle-icon {
+        width: 10px;
+        height: 10px;
+        position: relative;
+      }
+      .nav-toggle-icon::before,
+      .nav-toggle-icon::after {
+        content: "";
+        position: absolute;
+        background: currentColor;
+        transition: transform 0.22s ease, opacity 0.22s ease;
+      }
+      .nav-toggle-icon::before {
+        left: 0;
+        right: 0;
+        top: 50%;
+        height: 1.4px;
+        transform: translateY(-50%);
+      }
+      .nav-toggle-icon::after {
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        width: 1.4px;
+        transform: translateX(-50%);
+      }
+      .nav-dropdown.open .nav-toggle-icon::after {
+        opacity: 0;
+        transform: translateX(-50%) scaleY(0);
+      }
+
+      .nav-sub {
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: var(--nav-h);
+        padding: 18px 24px;
+        background: rgba(0, 0, 0, 0.97);
+        border-top: 1px solid var(--line-dark);
+        border-bottom: 1px solid var(--line-dark);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 32px;
+        transform: translateY(-16px);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.26s ease, transform 0.26s ease;
+        z-index: 250;
+        color: #fff;
+      }
+      .nav-dropdown.open .nav-sub {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+      .nav-sub .nav-link {
+        padding: 4px 0;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+      }
+      .nav-sub .nav-link::after {
+        bottom: -2px;
+      }
+
+      @media (max-width: 1023px) {
+        .nav-sub {
+          display: none !important;
+        }
+      }
+
       .actions {
         display: flex;
-        gap: 10px;
+        gap: 12px;
         align-items: center;
         justify-self: end;
       }
       .cta-small {
-        padding: 10px 14px;
+        padding: 10px 18px;
         border-radius: 999px;
         border: 1px solid currentColor;
         background: #fff;
         color: #000;
+        white-space: nowrap;
+        display: inline-block;
+        font-size: 14px;
       }
 
-      /* Ensure the "Book a Call" button is in one line */
-      .actions .cta-small {
-        white-space: nowrap; /* Prevent wrapping */
-        display: inline-block; /* Ensure it stays in one line */
-        padding: 12px 24px; /* Control padding for better size */
-        font-size: 16px; /* Adjust font size if needed */
+      /* Mobile menu button */
+      .mobile-menu-btn {
+        display: inline-flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 26px;
+        height: 18px;
+        margin-left: 6px;
+        background: transparent;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+      }
+      .mobile-menu-btn span {
+        height: 2px;
+        width: 100%;
+        background: currentColor;
+        border-radius: 999px;
+        transition: transform 0.22s ease, opacity 0.22s ease;
+      }
+      .mobile-menu-btn.open span:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+      }
+      .mobile-menu-btn.open span:nth-child(2) {
+        opacity: 0;
+      }
+      .mobile-menu-btn.open span:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
       }
 
-      @media (max-width: 420px) {
-        .actions .cta-small {
-          font-size: 14px; /* Adjust font size on smaller screens */
-          padding: 10px 18px; /* Adjust padding for smaller screens */
+      @media (min-width: 1024px) {
+        .mobile-menu-btn {
+          display: none;
         }
       }
 
+      @media (max-width: 1023px) {
+        nav.primary {
+          display: none;
+        }
+        .actions .cta-small {
+          display: none;
+        }
+      }
 
-      /* Section banners (big titles full width) */
+      /* Mobile nav overlay */
+      .mobile-nav-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.98);
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 14px;
+        transform: translateY(-100%);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        z-index: 240;
+      }
+      .mobile-nav-overlay.open {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .mobile-nav-link {
+        font-size: 14px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        padding: 6px 0;
+        position: relative;
+      }
+      .mobile-nav-link::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -4px;
+        height: 2px;
+        background: currentColor;
+        transform: scaleX(0);
+        transform-origin: left center;
+        transition: transform 0.25s ease;
+      }
+      .mobile-nav-link:hover::after {
+        transform: scaleX(1);
+      }
+      .mobile-nav-sub-label {
+        margin-top: 14px;
+        font-size: 10px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        opacity: 0.7;
+      }
+
+      /* Banners */
       .banner {
         padding: 36px 0;
         border-top: 1px solid currentColor;
@@ -250,36 +470,41 @@
       .band-light .panel {
         border-color: var(--line-light);
       }
-      .section-head {
-        margin-bottom: 22px;
-      }
 
       /* Hero */
       .hero {
         min-height: 92vh;
         display: grid;
         align-items: center;
-        position: relative; /* added for subtle background animation */
+        position: relative;
+        overflow: hidden;
       }
-      /* subtle hero micro-animation */
-      .hero::before{
-        content:"";
-        position:absolute; inset:-12% -12%;
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: -4% -4%;
         background:
-          radial-gradient(60% 60% at 70% 30%, rgba(255,255,255,.06), transparent 60%),
-          radial-gradient(40% 40% at 20% 70%, rgba(255,255,255,.04), transparent 60%);
+          radial-gradient(50% 50% at 70% 30%, rgba(255, 255, 255, 0.05), transparent 60%),
+          radial-gradient(35% 35% at 20% 70%, rgba(255, 255, 255, 0.03), transparent 60%);
         animation: floatGlow 18s ease-in-out infinite alternate;
-        pointer-events:none;
-        z-index:0;
+        pointer-events: none;
+        z-index: 0;
       }
-      .hero .wrap{ position: relative; z-index: 1; }
-      @keyframes floatGlow{
-        0% { transform: translate3d(0,0,0) scale(1); }
-        100% { transform: translate3d(1.5rem,-1rem,0) scale(1.03); }
+      .hero .wrap {
+        position: relative;
+        z-index: 1;
+      }
+      @keyframes floatGlow {
+        0% {
+          transform: translate3d(0, 0, 0) scale(1);
+        }
+        100% {
+          transform: translate3d(1.5rem, -1rem, 0) scale(1.03);
+        }
       }
 
       .h1 {
-        font-size: clamp(56px, 14vw, 148px);
+        font-size: clamp(46px, 12vw, 120px);
         line-height: 0.92;
         letter-spacing: -0.02em;
       }
@@ -308,6 +533,7 @@
         display: flex;
         gap: 12px;
         margin-top: 28px;
+        flex-wrap: wrap;
       }
       .cta {
         padding: 12px 18px;
@@ -316,6 +542,9 @@
         background: #fff;
         color: #000;
       }
+      .cta:hover {
+        transform: translateY(-1px);
+      }
       .cta-ghost {
         padding: 12px 18px;
         border-radius: 999px;
@@ -323,47 +552,16 @@
         background: transparent;
         color: inherit;
       }
+      .cta-ghost:hover {
+        transform: translateY(-1px);
+      }
       .band-light .cta-ghost {
-        border-color: var(--line-light);
+        border-color: #000;
+        color: #000;
       }
-      /* Make placeholders look clean and less "techy" */
-      .input-line::placeholder,
-      .input-area::placeholder {
-        font-family: Arial, sans-serif;
-        opacity: 0.65;
-        color: inherit;
-      }
-
-      /* Submit button underline animation (like nav links) */
-      .cta-underline {
-        position: relative;
-        background: none;
-        color: inherit;
-        border: none;
-        font-family: Helvetica, Arial, sans-serif;
-        font-size: 18px;
-        font-weight: 500;
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
-        padding: 12px 0;
-        cursor: pointer;
-      }
-
-      .cta-underline::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        height: 2px;
-        background: currentColor;
-        transform: scaleX(0);
-        transform-origin: left center;
-        transition: transform 0.28s ease;
-      }
-
-      .cta-underline:hover::after {
-        transform: scaleX(1);
+      .band-light .cta-ghost:hover {
+        background: #000;
+        color: #fff;
       }
 
       /* Trust row */
@@ -517,7 +715,7 @@
       }
       .input-line:focus,
       .input-area:focus {
-        box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.22);
+        box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.2);
       }
       .row {
         display: grid;
@@ -538,10 +736,42 @@
         gap: 12px;
         align-items: center;
         margin-top: 18px;
+        flex-wrap: wrap;
       }
       .form-status {
         font-size: 14px;
         margin-top: 12px;
+      }
+
+      .cta-underline {
+        position: relative;
+        background: none;
+        border: none;
+        padding: 10px 0;
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 12px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: inherit;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .cta-underline::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 2px;
+        background: currentColor;
+        transform: scaleX(0);
+        transform-origin: left center;
+        transition: transform 0.28s ease;
+      }
+      .cta-underline:hover::after {
+        transform: scaleX(1);
       }
 
       /* Footer */
@@ -572,24 +802,37 @@
       }
       .footer-social {
         display: flex;
-        gap: 12px;
+        gap: 16px;
         align-items: center;
         justify-content: flex-start;
       }
-      .footer-social img {
-        opacity: 0.8;
-        transition: opacity 0.2s ease, transform 0.2s ease;
+      .footer-social a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        border-radius: 999px;
+        border: 1px solid var(--line-dark);
+        transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
       }
-      .footer-social img:hover {
-        opacity: 1;
+      .footer-social a:hover {
+        background: #fff;
+        border-color: #fff;
         transform: translateY(-1px);
+      }
+      .footer-social svg {
+        width: 14px;
+        height: 14px;
+        fill: #fff;
+        transition: fill 0.2s ease;
+      }
+      .footer-social a:hover svg {
+        fill: #000;
       }
       @media (max-width: 900px) {
         .footer-grid {
           flex-direction: column;
-        }
-        .footer-social {
-          justify-content: flex-start;
         }
       }
 
@@ -611,57 +854,106 @@
     <!-- HEADER -->
     <header id="siteHeader">
       <div class="head-inner">
-        <a href="#top" class="brand" aria-label="MORS Home"
-          ><div class="wordmark">MORS</div></a
-        >
-        <nav class="primary" aria-label="Primary">
+        <a href="#top" class="brand" aria-label="MORS Home">
+          <div class="wordmark">MORS</div>
+        </a>
+
+        <nav class="primary" aria-label="Primary navigation">
           <a href="#home" class="nav-link" aria-current="page">HOME</a>
           <a href="#what" class="nav-link">WHAT WE DO</a>
           <a href="#deliver" class="nav-link">WHAT WE DELIVER</a>
           <a href="#why" class="nav-link">WHY IT MATTERS</a>
-          <a href="#examples" class="nav-link">EXAMPLE DEPLOYMENTS</a>
-          <a href="#law" class="nav-link">LAW</a>
-          <a href="#health" class="nav-link">HEALTHCARE</a>
-          <a href="#why-mors" class="nav-link">WHY MORS</a>
-          <a href="#promise" class="nav-link">OUR PROMISE</a>
+
+          <div class="nav-dropdown">
+            <button
+              class="nav-toggle"
+              type="button"
+              aria-haspopup="true"
+              aria-expanded="false"
+              aria-label="Toggle Why MORS menu"
+            >
+              <span class="nav-toggle-inner">
+                <span>WHY MORS</span>
+                <span class="nav-toggle-icon" aria-hidden="true"></span>
+              </span>
+            </button>
+            <div class="nav-sub" aria-label="Why MORS submenu">
+              <a href="#law" class="nav-link">For law</a>
+              <a href="#health" class="nav-link">For healthcare</a>
+              <a href="#promise" class="nav-link">Our promise</a>
+            </div>
+          </div>
+
           <a href="#contact" class="nav-link">CONTACT</a>
         </nav>
+
         <div class="actions">
-          <a href="#contact" class="cta-small">Book a call</a>
+          <a href="https://scheduler.zoom.us/ridwan-mohammad/morsglobal" class="cta-small">Book a call</a>
+          <button
+            id="mobileMenuBtn"
+            class="mobile-menu-btn"
+            aria-label="Open navigation menu"
+            aria-expanded="false"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
         </div>
       </div>
     </header>
 
+    <!-- Mobile nav overlay -->
+    <div id="mobileNav" class="mobile-nav-overlay" aria-label="Mobile navigation">
+      <a href="#home" class="mobile-nav-link">Home</a>
+      <a href="#what" class="mobile-nav-link">What we do</a>
+      <a href="#deliver" class="mobile-nav-link">What we deliver</a>
+      <a href="#why" class="mobile-nav-link">Why it matters</a>
+
+      <div class="mobile-nav-sub-label">Why MORS</div>
+      <a href="#law" class="mobile-nav-link">For law</a>
+      <a href="#health" class="mobile-nav-link">For healthcare</a>
+      <a href="#promise" class="mobile-nav-link">Our promise</a>
+
+      <a href="#contact" class="mobile-nav-link">Contact</a>
+    </div>
+
     <main id="top">
-      <!-- HERO -->
+      <!-- HERO (dark) -->
       <section id="home" class="band-dark hero">
         <div class="wrap">
-          <h1 id="heroTitle" class="h1 hero-type" data-text="Applied Intelligence"></h1>
+          <h1 id="heroTitle" class="h1 hero-type" aria-label="Applied Intelligence"></h1>
 
           <p class="lead appear">
-            AI and knowledge systems for regulated organisations — law, healthcare, real estate, and professional services.
+            Systems that turn your documents, records, and policies into reliable answers for people doing real work under regulation.
+          </p>
+
+          <p class="lead appear" style="margin-top:10px; font-size:15px;">
+            Typical targets: 30–70% less time spent searching and checking. Fewer missed details in long files.
           </p>
 
           <div class="buttons appear">
-            <a href="#contact" class="cta">Book a call</a>
-            <a href="#what" class="cta cta-ghost">Explore what we do</a>
+            <a href="https://scheduler.zoom.us/ridwan-mohammad/morsglobal" class="cta">Book a call</a>
+            <a href="#what" class="cta cta-ghost">See how it works</a>
           </div>
+
           <div class="trust appear">
-            <span class="hint">Built for regulated teams:</span>
-            <span>Law firms</span> ·
-            <span>Healthcare providers</span> ·
+            <span class="hint">For teams where mistakes and leaks are not acceptable:</span>
+            <span>Law</span> ·
+            <span>Healthcare</span> ·
             <span>Real estate</span> ·
             <span>Financial and professional services</span>
+            <span class="hint">Engagements under NDA. References available on request.</span>
           </div>
         </div>
       </section>
 
-      <!-- BANNER: WHAT WE DO -->
+      <!-- WHAT WE DO (light) -->
       <div class="band-light banner" id="what">
         <div class="wrap">
           <h2 class="banner-title">What we do</h2>
           <p class="banner-sub">
-            Make your knowledge usable — safely, quickly, and on your terms.
+            Design and deploy private, explainable AI systems that answer from your material — not the public internet.
           </p>
         </div>
       </div>
@@ -669,206 +961,197 @@
         <div class="wrap">
           <div class="grid g3 appear stagger">
             <div class="panel">
-              <h3>Answers you can trust</h3>
+              <h3>Directed answers</h3>
               <p class="lead">
-                Short, clear responses that link back to the exact paragraph in
-                your files.
+                Staff ask concrete questions and get short answers that point back to the underlying paragraph, clause, or policy.
               </p>
             </div>
             <div class="panel">
-              <h3>Private by default</h3>
+              <h3>Grounded in your rules</h3>
               <p class="lead">
-                No public services. Your information stays inside your boundary.
+                Models are constrained to your documents and instructions, so outputs reflect how your firm actually works.
               </p>
             </div>
             <div class="panel">
-              <h3>Remote delivery</h3>
+              <h3>Built quietly</h3>
               <p class="lead">
-                Everything set up off-site. Your team signs in and starts using
-                it.
+                Remote implementation, minimal change for end users, aligned with your identity and approval flows.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      <div class="band-light banner" id="deliver">
+      <!-- WHAT WE DELIVER (dark) -->
+      <div class="band-dark banner" id="deliver">
         <div class="wrap">
           <h2 class="banner-title">What we deliver</h2>
-          <p class="banner-sub">Practical ways to start without disrupting your operations.</p>
+          <p class="banner-sub">Clear starting points that can be measured and governed.</p>
         </div>
       </div>
+      <section class="band-dark">
+        <div class="wrap">
+          <div class="grid g3 appear stagger">
+            <div class="panel">
+              <h3>Private AI workspace</h3>
+              <p class="lead">
+                A controlled interface where people query only your documents, with linked citations for every response.
+              </p>
+              <a href="#contact" class="link-inline">Discuss a workspace →</a>
+            </div>
+            <div class="panel">
+              <h3>Confidential review</h3>
+              <p class="lead">
+                A short assessment to map where AI helps and where it should not be used, based on your risk posture.
+              </p>
+              <a href="#contact" class="link-inline">Request a review →</a>
+            </div>
+            <div class="panel">
+              <h3>Policy-aware tooling</h3>
+              <p class="lead">
+                Flows that embed your playbooks into daily decisions: intake, triage, drafting, escalation.
+              </p>
+              <a href="#contact" class="link-inline">Shape a pilot →</a>
+            </div>
+          </div>
+        </div>
+      </section>
 
+      <!-- WHY IT MATTERS (light) -->
+      <div class="band-light banner" id="why">
+        <div class="wrap">
+          <h2 class="banner-title">Why it matters</h2>
+          <p class="banner-sub">Faster output without losing control.</p>
+        </div>
+      </div>
       <section class="band-light">
         <div class="wrap">
           <div class="grid g3 appear stagger">
             <div class="panel">
-              <h3>Private AI Workspace</h3>
+              <h3>Time back</h3>
               <p class="lead">
-                Answers questions from your own documents only, with links back to source pages.
+                Cut manual searching, reconciling versions, and re-reading long files. Let people focus on judgment.
               </p>
-              <a href="#contact" class="nav-link" style="padding: 0">Book a call →</a>
             </div>
             <div class="panel">
-              <h3>Confidential AI Review</h3>
+              <h3>Consistent decisions</h3>
               <p class="lead">
-                Short engagement to map safe AI uses across your data, policies, and infrastructure.
+                The system answers the same way for the same fact pattern because it is tied to your approved sources.
               </p>
-              <a href="#contact" class="nav-link" style="padding: 0">Start a review →</a>
             </div>
             <div class="panel">
-              <h3>Policy-Aware Assistant</h3>
+              <h3>Defensible process</h3>
               <p class="lead">
-                An assistant that reflects your internal policies, precedents, and protocols.
+                Every answer can be traced back. Helpful when you need to show how you got there.
               </p>
-              <a href="#contact" class="nav-link" style="padding: 0">Discuss your use case →</a>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- BANNER: WHY IT MATTERS -->
-      <div class="band-dark banner" id="why">
-        <div class="wrap">
-          <h2 class="banner-title">Why it matters</h2>
-          <p class="banner-sub">Less time searching. More time deciding.</p>
-        </div>
-      </div>
-      <section class="band-dark">
-        <div class="wrap">
-          <div class="grid g3 appear stagger">
-            <div class="panel">
-              <h3>Work moves faster</h3>
-              <p class="lead">Drafts and summaries in minutes — not hours.</p>
-              <div class="metric">–70% <small>draft time</small></div>
-            </div>
-            <div class="panel">
-              <h3>Keep control</h3>
-              <p class="lead">You choose who sees what and for how long.</p>
-            </div>
-            <div class="panel">
-              <h3>Fits your teams</h3>
-              <p class="lead">Use your usual log-ins. No new tools to learn.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
+      <!-- EXAMPLE DEPLOYMENTS (dark) -->
       <div class="band-dark banner" id="examples">
         <div class="wrap">
-          <h2 class="banner-title">Example deployments (illustrative)</h2>
-          <p class="banner-sub">Scenarios that show how applied intelligence works in practice.</p>
+          <h2 class="banner-title">Example deployments</h2>
+          <p class="banner-sub">Three concrete jobs this can do.</p>
         </div>
       </div>
-
       <section class="band-dark">
         <div class="wrap">
           <div class="grid g3 appear stagger">
             <div class="panel">
-              <h3>Law firm (example)</h3>
+              <h3>Speed up bundle-to-brief</h3>
               <p class="lead">
-                Workspace indexing precedents and bundles with page-linked answers.
-                Target: 30–50% reduction in drafting time.
+                Highlight key points, issues, and references from large bundles with links kept intact.
               </p>
-              <p><em>For illustration only. No client data shown.</em></p>
             </div>
             <div class="panel">
-              <h3>Healthcare provider (example)</h3>
+              <h3>Enforce policy at the point of care</h3>
               <p class="lead">
-                Policy-aware assistant answering only from internal guidelines.
-                Target: faster, consistent decisions.
+                Clinicians see relevant guidance in a few lines, drawn only from your official documents.
               </p>
-              <p><em>For illustration only. No client data shown.</em></p>
             </div>
             <div class="panel">
-              <h3>Real estate portfolio (example)</h3>
+              <h3>See exposure across your leases</h3>
               <p class="lead">
-                Searchable clauses, covenants, and key dates across leases.
-                Target: reduced review overhead and fewer missed obligations.
+                Surface clauses, triggers, and deadlines across properties in one place instead of scattered PDFs.
               </p>
-              <p><em>For illustration only. No client data shown.</em></p>
             </div>
           </div>
+          <p class="note" style="margin-top:14px;">
+            Scenarios are illustrative. Real engagements run under NDA with client-specific controls.
+          </p>
         </div>
       </section>
 
-      <div class="band-dark banner" id="why-mors">
+      <!-- WHY MORS (light) -->
+      <div class="band-light banner" id="why-mors">
         <div class="wrap">
           <h2 class="banner-title">Why MORS</h2>
-          <p class="banner-sub">Built for confidentiality, control, and clarity.</p>
+          <p class="banner-sub">Built for firms that cannot treat AI as a toy.</p>
         </div>
       </div>
-
-      <section class="band-dark">
+      <section class="band-light">
         <div class="wrap">
           <div class="grid g3 appear stagger">
             <div class="panel">
-              <h3>No data harvesting</h3>
+              <h3>Control and privacy</h3>
               <p class="lead">
-                We do not train models on your documents and do not expose your data to public endpoints.
+                No use of your material to train shared models. No uncontrolled endpoints. Hosted where your rules require.
               </p>
             </div>
             <div class="panel">
-              <h3>In your control</h3>
+              <h3>Explainable by default</h3>
               <p class="lead">
-                Deploy in your chosen region or environment, aligned with your identity and access policies.
+                We design for traceability. If a system suggests an answer, you can see why.
               </p>
             </div>
             <div class="panel">
-              <h3>Explainable answers</h3>
+              <h3>Operator mindset</h3>
               <p class="lead">
-                Responses can link back to underlying documents for verification and audit.
-              </p>
-            </div>
-            <div class="panel">
-              <h3>NDA-first</h3>
-              <p class="lead">
-                Discovery and delivery can operate under NDA from the outset, with remote implementation.
+                We work from your constraints: regulation, client obligations, existing systems, political realities.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- BANNER: LAW -->
+      <!-- FOR LAW (dark) -->
       <div class="band-dark banner" id="law">
         <div class="wrap">
           <h2 class="banner-title">For law</h2>
-          <p class="banner-sub">
-            Drafts, clauses, and bundles — faster and sourced.
-          </p>
+          <p class="banner-sub">Keep quality; lose repetition.</p>
         </div>
       </div>
       <section class="band-dark">
         <div class="wrap">
           <div class="grid g2 appear stagger">
             <div class="panel">
-              <h3>Common needs</h3>
+              <h3>Typical focus</h3>
               <ul class="lead" style="margin: 8px 0 0 18px">
-                <li>First drafts from large bundles</li>
-                <li>Consistent clauses across matters</li>
-                <li>Clear activity records</li>
+                <li>Bundle-to-brief acceleration</li>
+                <li>Precedent and clause retrieval</li>
+                <li>Internal guidance surfaced in context</li>
               </ul>
             </div>
             <div class="panel">
-              <h3>What you get</h3>
+              <h3>What we implement</h3>
               <ul class="lead" style="margin: 8px 0 0 18px">
-                <li>Bundles → briefs with page links</li>
-                <li>Clauses built from your precedents</li>
-                <li>Downloadable usage and admin activity</li>
+                <li>Workspace mapped to your matter types</li>
+                <li>Links back to page and source</li>
+                <li>Usage signals available for KM and risk</li>
               </ul>
             </div>
           </div>
           <div class="appear" style="margin-top: 18px">
             <details class="case">
               <summary>
-                <span>Is client information ever shared?</span
-                ><span class="caret" aria-hidden="true"></span>
+                <span>How is confidentiality protected?</span>
+                <span class="caret" aria-hidden="true"></span>
               </summary>
               <div class="case-body">
                 <p class="lead">
-                  No. Your workspace is private and separate. We don’t use
-                  public endpoints.
+                  Deployments are isolated. Your data stays inside your chosen environment and is not repurposed.
                 </p>
               </div>
             </details>
@@ -876,43 +1159,42 @@
         </div>
       </section>
 
-      <!-- BANNER: HEALTHCARE -->
+      <!-- FOR HEALTHCARE (light) -->
       <div class="band-light banner" id="health">
         <div class="wrap">
           <h2 class="banner-title">For healthcare</h2>
-          <p class="banner-sub">Clear summaries. Policy-aware answers.</p>
+          <p class="banner-sub">Answers that match your local policies, not generic models.</p>
         </div>
       </div>
       <section class="band-light">
         <div class="wrap">
           <div class="grid g2 appear stagger">
             <div class="panel">
-              <h3>Common needs</h3>
+              <h3>Typical focus</h3>
               <ul class="lead" style="margin: 8px 0 0 18px">
-                <li>Summaries for handovers</li>
-                <li>Decisions aligned to local policy</li>
-                <li>Care with PHI/PII</li>
+                <li>Shift and handover summaries</li>
+                <li>Policy lookup at bedside or clinic</li>
+                <li>Guardrails around PHI and PII</li>
               </ul>
             </div>
             <div class="panel">
-              <h3>What you get</h3>
+              <h3>What we implement</h3>
               <ul class="lead" style="margin: 8px 0 0 18px">
-                <li>Notes → clear summaries in minutes</li>
-                <li>Answers that cite your protocols</li>
-                <li>Simple controls for keeping or deleting data</li>
+                <li>Answering only from approved protocols</li>
+                <li>Configurable retention and deletion</li>
+                <li>Audit-friendly logs for governance</li>
               </ul>
             </div>
           </div>
           <div class="appear" style="margin-top: 18px">
             <details class="case">
               <summary>
-                <span>Where is data kept?</span
-                ><span class="caret" aria-hidden="true"></span>
+                <span>Where is data kept?</span>
+                <span class="caret" aria-hidden="true"></span>
               </summary>
               <div class="case-body">
                 <p class="lead">
-                  In the region you choose. Residency and access follow your
-                  policies.
+                  In-region, in line with your existing clinical and information governance requirements.
                 </p>
               </div>
             </details>
@@ -920,55 +1202,50 @@
         </div>
       </section>
 
-      <!-- BANNER: OUR PROMISE -->
+      <!-- OUR PROMISE (dark) -->
       <div class="band-dark banner" id="promise">
         <div class="wrap">
           <h2 class="banner-title">Our promise</h2>
-          <p class="banner-sub">Discretion first. Clarity always.</p>
+          <p class="banner-sub">No noise. No surprises.</p>
         </div>
       </div>
       <section class="band-dark">
         <div class="wrap">
           <div class="grid g3 appear stagger">
             <div class="panel">
-              <h3>Separate workspace</h3>
+              <h3>Separation by design</h3>
               <p class="lead">
-                Your information is kept apart from other clients. No mixing.
+                Your deployment is not blended with others. Configurations and data stay in your lane.
               </p>
             </div>
             <div class="panel">
-              <h3>Simple sign-in</h3>
+              <h3>Straight answers</h3>
               <p class="lead">
-                Your staff use their usual log-ins. Add or remove access in
-                minutes.
+                We are explicit about constraints, trade-offs, and where AI should not be used.
               </p>
             </div>
             <div class="panel">
-              <h3>Clear records</h3>
+              <h3>Operational fit</h3>
               <p class="lead">
-                See who used it and when. Keep data only as long as you choose.
+                We work with your existing stack and approvals instead of asking you to start again.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- CONTACT -->
+      <!-- CONTACT (light) -->
       <div class="band-light banner" id="contact">
         <div class="wrap">
           <h2 class="banner-title">Contact us</h2>
           <p class="banner-sub">
-            Tell us what you need. We’ll prepare a private sandbox and a plan to
-            go live.
+            Tell us where you are stuck. We will respond with one or two specific options, not a scripted demo.
           </p>
         </div>
       </div>
       <section class="band-light">
         <div class="wrap">
-          <div
-            class="panel appear"
-            style="border: none; background: transparent"
-          >
+          <div class="panel appear" style="border:none; background:transparent">
             <h2 class="contact-title appear">Let's talk</h2>
             <form
               class="form-vertical stagger"
@@ -1027,7 +1304,7 @@
                     min="1"
                     step="1"
                     class="input-line"
-                    placeholder="e.g., 10"
+                    placeholder="e.g., 40"
                     required
                   />
                 </div>
@@ -1048,7 +1325,7 @@
                 type="text"
                 name="region"
                 class="input-line"
-                placeholder="United Kingdom"
+                placeholder="e.g., United Kingdom"
                 required
               />
 
@@ -1060,12 +1337,12 @@
                 <option>Urgent / this quarter</option>
               </select>
 
-              <label>What would you like this to do?</label>
+              <label>What should this help you do?</label>
               <input
                 type="text"
                 name="use_case"
                 class="input-line"
-                placeholder="Tell us what you’d like to improve or automate"
+                placeholder="e.g., reduce bundle review time; surface policy at point of care"
                 required
               />
 
@@ -1074,26 +1351,19 @@
                 rows="6"
                 name="message"
                 class="input-area"
-                placeholder="Share a bit more context, or when you’d like to start"
+                placeholder="Constraints, systems in play, or specific workflows you care about most."
               ></textarea>
 
-              <input
-                type="hidden"
-                name="_subject"
-                value="MORS Website Inquiry"
-              />
-              <input
-                type="hidden"
-                name="_cc"
-                value="rmohammad@morsglobal.com"
-              />
+              <input type="hidden" name="_subject" value="MORS Website Inquiry" />
+              <input type="hidden" name="_cc" value="rmohammad@morsglobal.com" />
 
               <div class="form-actions">
-                <button class="cta-underline" type="submit">Send secure enquiry</button>
-                <span class="note"
-                  >We reply within one business day. Remote delivery. NDA
-                  available on request.</span
-                >
+                <button class="cta-underline" type="submit">
+                  Send secure enquiry
+                </button>
+                <span class="note">
+                  We reply within one business day. Remote delivery. NDA available on request.
+                </span>
               </div>
               <div class="form-status" role="status" aria-live="polite"></div>
             </form>
@@ -1102,6 +1372,7 @@
       </section>
     </main>
 
+    <!-- FOOTER (dark) -->
     <footer class="band-dark">
       <div class="wrap footer-grid">
         <div class="footer-brand">
@@ -1110,27 +1381,40 @@
             © <span id="year"></span> MORS Consulting Ltd. All rights reserved.
           </div>
           <div class="copy">
-            Registered in England &amp; Wales · Privacy-led AI and systems consulting
+            Registered in England &amp; Wales · Privacy-led AI and systems consulting.
           </div>
           <div class="copy">
-            <a href="mailto:contact@morsglobal.com">contact@morsglobal.com</a>
-          </div>
-          <div class="copy">
-            <a href="#!" style="text-decoration:underline">Privacy</a> ·
-            <a href="#!" style="text-decoration:underline">Terms</a>
+            <a href="privacy.html" style="text-decoration:underline">Privacy</a> ·
+            <a href="terms.html" style="text-decoration:underline">Terms</a>
           </div>
         </div>
         <div class="footer-social">
-          <a href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn">
-            <img src="icons/linkedin.svg" alt="LinkedIn" width="22" height="22" />
+          <a
+            href="https://linkedin.com"
+            target="_blank"
+            rel="noopener"
+            aria-label="Visit MORS on LinkedIn"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <title>LinkedIn</title>
+              <path d="M4.98 3.5C4.98 4.88 3.9 6 2.5 6 1.12 6 0 4.88 0 3.5 0 2.12 1.12 1 2.5 1 3.9 1 4.98 2.12 4.98 3.5zM.3 8.25h4.4V23.5H.3zM8.34 8.25h4.21v2.07h.06c.59-1.12 2.03-2.3 4.18-2.3 4.47 0 5.29 2.94 5.29 6.76v8.72h-4.4v-7.73c0-1.84-.03-4.2-2.56-4.2-2.56 0-2.95 2-2.95 4.07v7.86H8.34z" />
+            </svg>
           </a>
-          <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook">
-            <img src="icons/facebook.svg" alt="Facebook" width="22" height="22" />
+          <a
+            href="https://facebook.com"
+            target="_blank"
+            rel="noopener"
+            aria-label="Visit MORS on Facebook"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <title>Facebook</title>
+              <path d="M22.68 0H1.32C.59 0 0 .59 0 1.32v21.36C0 23.41.59 24 1.32 24h11.5v-9.29H9.69v-3.62h3.13V8.41c0-3.1 1.89-4.79 4.65-4.79 1.32 0 2.45.1 2.78.14v3.22h-1.9c-1.49 0-1.78.71-1.78 1.75v2.3h3.56l-.46 3.62h-3.1V24h6.08c.73 0 1.32-.59 1.32-1.32V1.32C24 .59 23.41 0 22.68 0z" />
+            </svg>
           </a>
         </div>
       </div>
     </footer>
 
-    <script src="main.js"></script>
+    <script src="main.js" defer></script>
   </body>
 </html>
