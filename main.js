@@ -8,14 +8,14 @@ document.addEventListener('DOMContentLoaded', () => {
 (function typeHero() {
   const el = document.getElementById('heroTitle');
   if (!el) return;
-  const text = el.getAttribute('data-text') || 'Built On Trust';
+  const text = el.getAttribute('data-text') || 'Applied Intelligence';
   let i = 0;
-  const tick = () => { el.textContent = text.slice(0, i++); if (i <= text.length) setTimeout(tick, 95); };
+  const tick = () => { el.textContent = text.slice(0, i++); if (i <= text.length) setTimeout(tick, 105); };
   setTimeout(tick, 250);
 })();
 
 // Appear + Stagger
-const appearEls = [...document.querySelectorAll('.appear, .panel.appear, .footer-search, .banner .wrap, .contact-wrap')];
+const appearEls = [...document.querySelectorAll('.appear, .panel.appear, .banner .wrap')];
 const staggerContainers = [...document.querySelectorAll('.stagger')];
 
 const appearIO = new IntersectionObserver((entries) => {
@@ -58,71 +58,28 @@ function onScroll() {
 }
 window.addEventListener('scroll', () => { if (!ticking){ requestAnimationFrame(onScroll); ticking = true; }});
 
-// Footer site search (in-page)
-const input = document.getElementById('siteSearchInput');
-const btn = document.getElementById('siteSearchBtn');
-const resultsBox = document.getElementById('siteSearchResults');
-
-let siteIndex = [];
-function buildIndex() {
-  siteIndex = [];
-  document.querySelectorAll('section[id], .banner[id]').forEach((sec) => {
-    const id = sec.id;
-    const title = sec.querySelector('h1,h2')?.textContent?.trim() || id;
-    const textBits = [];
-    (sec.querySelectorAll('p,li,h3') || []).forEach(n => textBits.push(n.textContent.trim()));
-    const blob = (title + ' ' + textBits.join(' ')).toLowerCase();
-    siteIndex.push({ title, href: `#${id}`, blob });
-
-    sec.querySelectorAll('h3')?.forEach((h3) => {
-      const t = h3.textContent.trim();
-      siteIndex.push({ title: `${t} — ${title}`, href: `#${id}`, blob: (t + ' ' + blob).toLowerCase() });
-    });
-  });
-}
-buildIndex();
-
-function renderResults(q) {
-  if (!resultsBox) return;
-  const query = (q || '').trim().toLowerCase();
-  if (!query) { resultsBox.innerHTML = ''; return; }
-  const hits = siteIndex.filter(i => i.blob.includes(query)).slice(0, 12);
-  resultsBox.innerHTML = hits.length
-    ? hits.map(h => `<a href="${h.href}">${h.title}</a>`).join('')
-    : `<div>No results for “${q}”.</div>`;
-}
-
-btn?.addEventListener('click', () => renderResults(input?.value));
-input?.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter') {
-    if (!resultsBox?.querySelector('a')) renderResults(input.value);
-    const first = resultsBox?.querySelector('a');
-    if (first) first.click();
-  }
-});
-input?.addEventListener('input', (e) => {
-  if (e.target.value.trim().length >= 2) renderResults(e.target.value);
-  else resultsBox.innerHTML = '';
-});
-
 // Formspree async submit UX
 const form = document.querySelector('form[action^="https://formspree.io/"]');
 if (form) {
+  const status = form.querySelector('.form-status');
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const btnEl = form.querySelector('button[type="submit"]');
+    if (!btnEl) return;
+    const originalText = btnEl.textContent;
     btnEl.disabled = true; btnEl.textContent = 'Sending…';
+    if (status) status.textContent = '';
     try {
       const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' }});
       if (res.ok) {
         form.innerHTML = `
-          <p class="lead" style="padding:18px;border-radius:14px;background:rgba(0,0,0,.06);color:#000">
-            Thank you — your message has been sent. We’ll respond within one business day.
-          </p>`;
+          <div class="lead" style="padding:20px;border-radius:14px;background:rgba(0,0,0,0.05);max-width:640px;">
+            Thank you — your secure enquiry has been received. We will respond within one business day.
+          </div>`;
       } else { throw new Error(); }
     } catch {
-      btnEl.disabled = false; btnEl.textContent = 'Submit';
-      alert('Sorry, something went wrong. Please email us directly.');
+      btnEl.disabled = false; btnEl.textContent = originalText;
+      if (status) status.textContent = 'Sorry, something went wrong. Please email contact@morsglobal.com and we will assist right away.';
     }
   });
 }
