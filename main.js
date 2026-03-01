@@ -141,7 +141,7 @@ window.addEventListener('scroll', () => {
   }
 });
 
-// WHY MORS desktop overlay
+// WHY MARLEY desktop overlay
 const dropdown = document.querySelector('.nav-dropdown');
 const toggle = dropdown?.querySelector('.nav-toggle');
 const navSub = dropdown?.querySelector('.nav-sub');
